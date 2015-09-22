@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:lang="http://www.springframework.org/schema/lang" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd		
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+  
+  <!--Spring Bean definitions go here-->
+           <context:annotation-config />    
+           <context:component-scan base-package="pa.acp.portal.sp.model"/> 
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@rialto:11633:TOLEDATA"></property>
+        <property name="username" value="APP_OWNER_SP"></property>
+        <property name="password" value="x$v$6l$x6tx$9K$9$Fqg$$51n0"></property>
+         </bean>
+         <bean id="transactionManager"
+              class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>  
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="classpath*:pa/acp/portal/sp/model/plsql/mappers/*.xml" /> 
+        <property name="typeAliasesPackage" value="pa.acp.portal.sp.model.plsql.type" />
+    </bean>
+    
+     <bean id="DaoBasico" class="org.mybatis.spring.mapper.MapperFactoryBean"
+              abstract="true" lazy-init="true">
+         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+       
+     <bean id="get_DeclaredDocsDet_Mapper" parent="DaoBasico">
+        <property name="mapperInterface" value="pa.acp.portal.sp.model.plsql.mappers.Get_DeclaredDocsDet_Mapper" />
+    </bean>
+    
+    <bean id="sp_CustomSqlQueries_Mapper" parent="DaoBasico">
+        <property name="mapperInterface" value="pa.acp.portal.sp.model.plsql.mappers.SP_CustomSqlQueries_Mapper" />
+    </bean>
+    
+     <bean id="getDaoTest" class="pa.acp.portal.sp.model.dao.main.Get_DeclaredDocsDet_DaoTest">
+    
+    </bean>  
+</beans>

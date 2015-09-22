@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pa.acp.portal.sp.model.plsql.mappers.SP_CustomSqlQueries_Mapper">
+    <select id="GetHarmonizedCodes" resultType="map" parameterType="hashmap">
+        <![CDATA[
+            SELECT CLASS_ID, DESCR FROM HARM_CLASS_CDS
+            WHERE 1 = 1
+        ]]>
+            <if test="classId != null">
+                <![CDATA[
+                    AND CLASS_ID LIKE #{classId}
+                ]]>    
+            </if>
+            <if test="descr != null">
+                <![CDATA[
+                    AND DESCR LIKE #{descr}
+                ]]>
+            </if>
+    </select>
+    <select id="GetTxnStatVal" parameterType="java.util.Map" statementType="CALLABLE" useCache="false" >
+      <![CDATA[
+        {
+        call SP_TXN_STAT_VAL_WS(
+        
+        #{p_audit_item_inout, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_AUDIT_ITEM, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_AUDIT_ITEM_HANDLER},
+        #{p_txn_sub_det_inout, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_TXN_SUB_DET, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_TXN_SUB_DET_HANDLER}        
+         )
+        }
+      ]]>
+    </select>
+</mapper>

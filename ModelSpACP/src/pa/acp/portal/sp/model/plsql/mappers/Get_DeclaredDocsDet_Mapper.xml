@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pa.acp.portal.sp.model.plsql.mappers.Get_DeclaredDocsDet_Mapper">
+
+ 
+    <select id="GetVisibInfoMapper" parameterType="java.util.Map" statementType="CALLABLE" useCache="false" >
+      <![CDATA[
+        {
+        call PKG_TXN_UTIL.P_TXN_VISIB_GET
+        ( 
+        #{p_audit_item_inout, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_AUDIT_ITEM, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_AUDIT_ITEM_HANDLER},
+        #{p_txn_sub_det_inout, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_TXN_SUB_DET, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_TXN_SUB_DET_HANDLER},
+        #{p_msrseq_in, javaType=String,jdbcType=VARCHAR, mode=IN},
+        #{p_msrgrpseq_in, javaType=String,jdbcType=VARCHAR, mode=IN},
+        #{p_visib_det_out, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_VISIB_DET, mode=OUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_VISIB_DET_HANDLER}
+         )
+        }
+      ]]>
+    </select>
+    <select id="GetVslConditionInfoMapper" parameterType="java.util.Map" statementType="CALLABLE" useCache="false" >
+      <![CDATA[
+        {
+        call PKG_TXN_UTIL.P_TXN_VSLCOND_GET
+        ( 
+        #{p_audit_item_inout, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_AUDIT_ITEM, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_AUDIT_ITEM_HANDLER},
+        #{p_txn_sub_det_in, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_TXN_SUB_DET, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_TXN_SUB_DET_HANDLER},
+        #{p_msrseq_in, javaType=String,jdbcType=VARCHAR, mode=IN},
+        #{p_msrgrpseq_in, javaType=String,jdbcType=VARCHAR, mode=IN},
+        #{p_list_out_vsl_cond_out, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_VSL_COND, mode=OUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_VSL_COND_HANDLER}
+         )
+        }
+      ]]>
+    </select>
+    
+    
+    <!--Mapper para Peaple on brd Crew-->
+       <select id="GetPeapleOnBoredCrlMapper" parameterType="java.util.Map" statementType="CALLABLE" useCache="false" >
+      <![CDATA[
+        {
+        call PKG_TXN_UTIL.P_TXN_CRL_GET
+        ( 
+        #{p_audit_item_inout, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_AUDIT_ITEM, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_AUDIT_ITEM_HANDLER},
+        #{p_txn_sub_det_in, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_TXN_SUB_DET, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_TXN_SUB_DET_HANDLER},        
+        #{p_list_out_PEOPLE_ON_BRD, javaType=Object,jdbcType=ARRAY,jdbcTypeName=TAB_PEOPLE_ON_BRD, mode=OUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.TAB_PEOPLE_ON_BRD_HANDLER}
+         )
+        }
+      ]]>
+    </select>
+    
+    
+    <!--Mapper para Peaple on brd Pgl-->
+       <select id="GetPeapleOnBoredPglMapper" parameterType="java.util.Map" statementType="CALLABLE" useCache="false" >
+      <![CDATA[
+        {
+        call PKG_TXN_UTIL.P_TXN_PGL_GET
+        ( 
+        #{p_audit_item_inout, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_AUDIT_ITEM, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_AUDIT_ITEM_HANDLER},
+        #{p_txn_sub_det_in, javaType=Object,jdbcType=STRUCT,jdbcTypeName=REC_TXN_SUB_DET, mode=INOUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.REC_TXN_SUB_DET_HANDLER},        
+        #{p_list_out_PEOPLE_ON_BRD, javaType=Object,jdbcType=ARRAY,jdbcTypeName=TAB_PEOPLE_ON_BRD, mode=OUT, typeHandler=pa.acp.portal.sp.model.plsql.TypeHandler.TAB_PEOPLE_ON_BRD_HANDLER}
+         )
+        }
+      ]]>
+    </select>
+    
+    
+</mapper>
